@@ -38,9 +38,9 @@ function App() {
         </Alert>
       </Snackbar>
       <Router>
-        {userDetails.isUserLogin ? <Redirect to="/dashboard" /> : <Redirect to="/login" />}
+      {userDetails.isUserLogin ? <Redirect to="/dashboard" /> : <Redirect to="/login" />}
         <Switch>
-          <PrivateRoute authed={userDetails.isUserLogin} path='/dashboard' component={Dashboard} />
+          <Route path="/dashboard" exact component={Dashboard}/>
           <Route path="/login" exact component={Usersignup}/>
         </Switch>
       </Router>
