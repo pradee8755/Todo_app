@@ -10,6 +10,7 @@ const register = { name: "", rePass: "", password: "", email: "" };
 
 export default function Usersignup() {
     const registerUsersDeatils = useSelector((state) => state.usersDetails);
+    const [desktopView, setDesktopView] = useState(true);
     const [selectedTab, setselectedTab] = useState("login");
     const [loginDetails, setLoginDetails] = useState(login);
     const [registerDetails, setregisterDetails] = useState(register);
@@ -19,7 +20,9 @@ export default function Usersignup() {
     useEffect(() => {
         setUsersDetails([...registerUsersDeatils]);   
     }, [registerUsersDeatils]);
-
+    useEffect(() => {
+        setDesktopView(window.innerWidth >= 600 ? true : false);
+    }, []);
     // Update input values 
     const handleChange = (e) => {
             selectedTab === "login" ?
@@ -82,7 +85,8 @@ export default function Usersignup() {
 
 
     return (
-        <div className="constainer layout vertical">
+        desktopView ? 
+        <div className="container layout vertical">
             <div className="body layout horizontal">
                 <img className="wall layout horizontal center-center" alt='todoWall' src={todoWall}></img>
                 <div className="form layout vertical justified">
@@ -128,7 +132,53 @@ export default function Usersignup() {
                 </div>
             </div>
             <div className="footer layout horizontal center-center"></div>
+        </div>:    
+        <div className="container layout vertical">
+                <img className="wall layout horizontal center-center" alt='todoWall' src={todoWall}></img>
+                <div className="LoginTab layout vertical center-center">
+                <div className="form layout vertical justified">
+                    <div className="buttonType layout horizontal center-center end">
+                        <div className="buttons layout horizontal justified">
+                            <input type="submit" value="login" className="btn btn-outline-primary" onClick={handleTab} />
+                            <input type="submit" value="register" className="btn btn-outline-primary" onClick={handleTab} />
+                        </div>
+                    </div>
+                    <div className="formInput layout vertical center">
+                        {selectedTab === 'login' ?
+                            <form className="todoForm" onSubmit={handleSubmit} >
+                                <div className="form-group">
+                                    <label >Email</label>
+                                    <input name="email" type="email" required value={loginDetails.email} onChange={handleChange} className="form-control" id="emailImput" placeholder="email@domain.com" />
+                                </div>
+                                <div className="form-group">
+                                    <label for="passImput">Password</label>
+                                    <input name="password" type="password" required value={loginDetails.password} onChange={handleChange} className="form-control" id="passImput" placeholder="Password" />
+                                </div>
+                                <input type="submit" value="Submit" className="btn btn-primary" />
+                            </form> :
+                            <form className="todoForm" onSubmit={handleSubmit} >
+                                <div className="form-group">
+                                    <label for="nameImput">Name</label>
+                                    <input type="text" name="name" required value={registerDetails.name} onChange={handleChange} className="form-control" id="nameImput" placeholder="Name" minlength="5" />
+                                </div>
+                                <div className="form-group">
+                                    <label for="emailImput">Email</label>
+                                    <input name="email" type="email" required value={registerDetails.email} onChange={handleChange} className="form-control" id="emailImput" placeholder="email@domain.com" minlength="8" />
+                                </div>
+                                <div className="form-group">
+                                    <label for="passImput">Password</label>
+                                    <input name="password"  min="4" type="password" required value={registerDetails.password} onChange={handleChange} className="form-control" id="passImput" placeholder="Password" minlength="4"/>
+                                </div>
+                                <div className="form-group">
+                                    <label for="rePassImput">Re-Password</label>
+                                    <input name="rePass" min="4" type="password" required value={registerDetails.rePass} onChange={handleChange} className="form-control" id="rePassImput" placeholder="Re-Password" minlength="4"/>
+                                </div>
+                                <input type="submit" value="Submit" className="btn btn-primary" />
+                            </form>}
+                    </div>
+                </div>
+                </div>
         </div>
-    );
+        );
   }
 

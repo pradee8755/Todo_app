@@ -1,3 +1,34 @@
+@media only screen and (max-width: 599px) {
+  .addNewTodo {
+    position: absolute;
+    top: 2%;
+    left: 2%;
+  }
+  .popUpWithOverlay {
+    position: absolute;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+    background: black;
+    background: rgba(0, 0, 0, 0.5);
+  }
+  .completeBtn {
+    width: 50%;
+    background: white;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  .closePopUpWithOverlay {
+    position: absolute;
+    right: 0%;
+    top: 0%;
+  }
+}
+@media only screen and (min-width: 600px) {
+  .completeBtn {
+    width: 100%;
+  }
+}
 .dashContainer {
   position: absolute;
   width: 100%;
@@ -14,6 +45,7 @@
   position: relative;
   height: 10%;
   width: 100%;
+  padding: 10px;
   background-color: rgb(73, 73, 255);
 }
 
@@ -88,9 +120,7 @@
   overflow-y: auto;
   box-shadow: 0px 2px 13px -1px rgba(0, 0, 0, 0.75);
 }
-.completeBtn {
-  width: 100%;
-}
+
 .compleBtn {
   height: 35px;
   padding-top: 30px;
@@ -107,7 +137,4 @@
 
 .logoutTxt {
   color: white;
-}
-
-@media (min-width: 576px) {
 }
