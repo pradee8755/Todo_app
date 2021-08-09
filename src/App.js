@@ -11,11 +11,16 @@ function App() {
   const userDetails = useSelector((state) => state.registerUser);
   const snackBarNotification = useSelector((state) => state.snackBarNotification);
   const [open, setOpen] = useState(false);
+  const [loggedUserDetails, setLoggedUserDetails] = useState({});
 
   function Alert(props) {
     return <MuiAlert elevation={6} variant="filled" {...props} />;
   };
 
+  useEffect(()=> {
+    setLoggedUserDetails(userDetails)
+  },[userDetails]);
+  
   useEffect(()=> {
     if(Object.keys(snackBarNotification).length > 0){
       // setNotificationMsg({...snackBarNotification});
@@ -38,9 +43,9 @@ function App() {
         </Alert>
       </Snackbar>
       <Router>
-      {userDetails.isUserLogin ? <Redirect to="/dashboard" /> : <Redirect to="/login" />}
+      {userDetails.isUserLogin ? '' : <Redirect to="/login" />}
         <Switch>
-          <Route path="/dashboard" exact component={Dashboard}/>
+          <PrivateRoute authed={loggedUserDetails.isUserLogin} path='/dashboard' component={Dashboard} />
           <Route path="/login" exact component={Usersignup}/>
         </Switch>
       </Router>
