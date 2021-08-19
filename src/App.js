@@ -8,7 +8,6 @@ import {
   Route,
   Redirect,
 } from "react-router-dom";
-import PrivateRoute from "./components/todo-privateroute";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 
